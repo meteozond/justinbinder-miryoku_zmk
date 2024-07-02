@@ -8,11 +8,11 @@
 
 &kscan0 {
     col-gpios
-        = <&gpio1 6  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // col0 in the schematic
-        , <&gpio1 4  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // col1 in the schematic
-        , <&gpio0 11 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // col2 in the schematic
+        = <&gpio0 2  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // col0 in the schematic
+        , <&gpio0 29  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // col1 in the schematic
+        , <&gpio0 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // col2 in the schematic
         , <&gpio1 0  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // col3 in the schematic
-        , <&gpio0 24 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // col4 in the schematic
+        , <&gpio0 11 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)> // col4 in the schematic
         ;
 };
 
@@ -20,17 +20,17 @@
 &pinctrl {
     spi0_default: spi0_default {
         group1 {
-            psels = <NRF_PSEL(SPIM_SCK, 0, 8)>,
-                <NRF_PSEL(SPIM_MOSI, 0, 17)>,
-                <NRF_PSEL(SPIM_MISO, 0, 17)>;
+            psels = <NRF_PSEL(SPIM_SCK, 1, 13)>,
+                    <NRF_PSEL(SPIM_MOSI, 0, 10)>,
+                    <NRF_PSEL(SPIM_MISO, 1, 11)>;
         };
     };
 
     spi0_sleep: spi0_sleep {
         group1 {
-            psels = <NRF_PSEL(SPIM_SCK, 0, 8)>,
-                <NRF_PSEL(SPIM_MOSI, 0, 17)>,
-                <NRF_PSEL(SPIM_MISO, 0, 17)>;
+            psels = <NRF_PSEL(SPIM_SCK, 1, 13)>,
+                    <NRF_PSEL(SPIM_MOSI, 0, 10)>,
+                    <NRF_PSEL(SPIM_MISO, 1, 11)>;
             low-power-enable;
         };
     };
@@ -42,12 +42,12 @@
     pinctrl-0 = <&spi0_default>;
     pinctrl-1 = <&spi0_sleep>;
     pinctrl-names = "default", "sleep";
-    cs-gpios = <&gpio0 20 GPIO_ACTIVE_LOW>;
+    cs-gpios = <&gpio1 7 GPIO_ACTIVE_LOW>;
 
     trackball: trackball@0 {
         status = "okay";
         evt-type = <2>; //<INPUT_EV_REL>
-        irq-gpios = <&gpio0 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         compatible = "pixart,pmw3360";
         reg = <0>;
         spi-max-frequency = <2000000>;
